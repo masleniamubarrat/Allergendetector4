@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".sign_up">
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+
+        android:background="#FFB74D"> <!-- Light Orange Color -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="" /> <!-- Centered text -->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/sign_up_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="#FFCC80">
+
+        <TextView
+
+            android:id="@+id/sign_up_textView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Sign up"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <EditText
+            android:inputType="text"
+            android:layout_marginStart="10dp"
+            android:id="@+id/sign_up_name"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:text="Full name"/>
+
+        <EditText
+            android:inputType="textEmailAddress"
+            android:layout_marginStart="10dp"
+            android:id="@+id/sign_up_email"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:text="Enter your email address"/>
+
+        <EditText
+            android:inputType=""
+            android:layout_marginStart="10dp"
+            android:id="@+id/sign_up_password"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:text="Create a password"/>
+
+        <EditText
+            android:inputType=""
+            android:layout_marginStart="10dp"
+            android:id="@+id/sign_up_retype_password"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:text="Retype password"/>
+
+        <Button
+            android:id="@+id/sign_up_button"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign up"/>
+
+        <TextView
+            android:id="@+id/sign_in_link"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Already registered ? Sign in!"
+            android:textAlignment="center"/>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "785383956489",
+    "project_id": "allergen-detector-3d948",
+    "storage_bucket": "allergen-detector-3d948.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:785383956489:android:2b7a102a74e5414da098d8",
+        "android_client_info": {
+          "package_name": "com.example.allergendetector"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "785383956489-5pdmtqn59kks98nnea42t9oe09mmg9gm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlyy0Wggva329nTM6Ivd0sA0f3-nMvdXg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "785383956489-5pdmtqn59kks98nnea42t9oe09mmg9gm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
