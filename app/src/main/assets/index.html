@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GSAP Animation</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <style>
+        h1 {
+            font-size: 12px;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+    </style>
+</head>
+<body>
+<h1>Join our Facebook community today</h1>
+
+<script>
+        window.onload = function() {
+            // GSAP animation code
+            gsap.fromTo("h1", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 2.5, ease: "power2.out" });
+        };
+    </script>
+</body>
+</html>

@@ -9,6 +9,14 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string-array name="allergen_options">
+        <item>Eggs</item>
+        <item>Milk</item>
+        <item>Wheat</item>
+        <item>Soy</item>
+        <!-- Add more options as needed -->
+    </string-array>
+
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

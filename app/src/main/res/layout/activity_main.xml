@@ -5,7 +5,11 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp">
 
     <LinearLayout
         android:id="@+id/heading_layout"
@@ -15,7 +19,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
 
-        android:background="#FFB74D"> <!-- Light Orange Color -->
+        > <!-- Light Orange Color -->
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,62 +30,74 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
         android:id="@+id/sign_in_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
+        android:layout_height="405dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="20dp"
-        android:background="#FFCC80">
+
+        android:orientation="vertical">
 
         <TextView
-
+            android:layout_gravity="center"
             android:id="@+id/sign_in_textView"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:background="#FFFFFF"
             android:text="sign in"
             android:textAlignment="center"
             android:textSize="20sp" />
 
         <EditText
-            android:inputType="text"
-            android:layout_marginStart="10dp"
             android:id="@+id/sign_in_email"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="Username or email"/>
+            android:background="#FFFFFF"
+            android:inputType="text"
+            android:hint="Username or email" />
 
         <EditText
-            android:inputType=""
-            android:layout_marginStart="10dp"
             android:id="@+id/sign_in_password"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="Password"/>
+            android:background="#FFFFFF"
+            android:inputType=""
+            android:hint="Password" />
 
         <Button
             android:id="@+id/sign_in_button"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign In"/>
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="#FFFFFF"
+            android:text="Sign In" />
 
         <TextView
             android:id="@+id/sign_up_link"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
             android:text="do not have an account? sign up"
-            android:textAlignment="center"/>
-
+            android:textAlignment="center" />
 
 
     </LinearLayout>
+
+    <WebView
+
+        android:layout_marginTop="10dp"
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
 
 </LinearLayout>
 

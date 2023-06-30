@@ -1,7 +1,14 @@
 package com.example.allergendetector;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -11,14 +18,51 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class homePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
+    Button logOutButton;
+    Spinner dropdownSpinner;
+    LinearLayout selectedItemsLayout;
+    List<String> selectedItems;
+    Button popularBlogButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        popularBlogButton = findViewById(R.id.popular_blog_button);
+        popularBlogButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(homePage.this, PopularBlog.class );
+                startActivity(intent);
+
+            }
+        });
+
+
+        /*logOutButton =  findViewById(R.id.log_out_button);
+
+
+
+
+
+        logOutButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(homePage.this, MainActivity.class );
+                startActivity(intent);
+
+            }
+        });*/
+
 
         // Find the DrawerLayout in the XML layout
         drawer = findViewById(R.id.drawer_layout);
@@ -55,5 +99,18 @@ public class homePage extends AppCompatActivity implements NavigationView.OnNavi
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.homepage_menu_items, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        return super.onOptionsItemSelected(item);
     }
 }

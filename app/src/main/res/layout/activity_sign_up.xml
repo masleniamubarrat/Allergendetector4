@@ -52,7 +52,18 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:text="Full name"/>
+            android:hint="Full name"/>
+
+        <EditText
+            android:id="@+id/date_picker_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:hint="Select your birthdate"
+            android:inputType="none"
+            android:onClick="showDatePickerDialog" />
+
 
         <EditText
             android:inputType="textEmailAddress"
@@ -61,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:text="Enter your email address"/>
+            android:hint="Enter your email address"/>
 
         <EditText
             android:inputType=""
@@ -70,7 +81,55 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:text="Create a password"/>
+            android:hint="Create a password"/>
+
+        <LinearLayout
+            android:id="@+id/password_rules_layout"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/password_length"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/ic_cross"
+                android:text="Min length 7"
+                android:textColor="#FF0000" />
+
+            <TextView
+                android:id="@+id/password_no_space"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/ic_cross"
+                android:text="No space"
+                android:textColor="#FF0000" />
+            <TextView
+                android:id="@+id/password_at_least_one_digit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/ic_cross"
+                android:text="At least one digit"
+                android:textColor="#FF0000" />
+
+            <TextView
+                android:id="@+id/password_only_one_special_char"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/ic_cross"
+                android:text="Only one special character"
+                android:textColor="#FF0000" />
+
+
+
+
+        </LinearLayout>
 
         <EditText
             android:inputType=""
@@ -79,7 +138,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:text="Retype password"/>
+            android:hint="Retype password"/>
 
         <Button
             android:id="@+id/sign_up_button"
