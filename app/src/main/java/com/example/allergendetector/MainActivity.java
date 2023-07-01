@@ -4,7 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebResourceError;
@@ -20,17 +24,40 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.widget.TextView;
+
 
 import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
      EditText signInEmailEditText, signInPasswordEditText;
+     TextView headlineTextView;
+
      private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //this code segment is to set the text color
+        //of headline gradient brown.
+
+        headlineTextView = findViewById(R.id.title_textview);
+        String text = "NoToNut";
+        SpannableString spannableString = new SpannableString(text);
+        int startColor = Color.parseColor("#A52A2A");
+        int endColor =  Color.parseColor("#8B4513");
+
+        LinearGradient gradient = new LinearGradient(0, 0, 0, headlineTextView.getTextSize(),
+                startColor, endColor, Shader.TileMode.CLAMP);
+
+        spannableString.setSpan(new ShaderSpan(gradient),
+                0,spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        headlineTextView.setText(spannableString);
+
         WebView webView = findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
 

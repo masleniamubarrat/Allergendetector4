@@ -11,23 +11,20 @@
     android:layout_marginStart="20dp"
     android:layout_marginEnd="20dp">
 
-    <LinearLayout
-        android:id="@+id/heading_layout"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-
-        > <!-- Light Orange Color -->
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="" /> <!-- Centered text -->
+            android:id="@+id/title_textview"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:text="NoToNut"
+            android:textSize="20sp"
+            android:textStyle="bold"
+             />
 
-    </LinearLayout>
+
+
 
     <LinearLayout
         android:id="@+id/sign_in_layout"
@@ -87,16 +84,18 @@
             android:text="do not have an account? sign up"
             android:textAlignment="center" />
 
+        <WebView
+
+            android:layout_marginTop="10dp"
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
 
     </LinearLayout>
 
-    <WebView
 
-        android:layout_marginTop="10dp"
-        android:id="@+id/webView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
 
 
 </LinearLayout>
