@@ -24,19 +24,37 @@ import java.util.List;
 public class homePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
-    Button logOutButton;
+    Button getLogOutButton, getProfileButton, getPopularBLogButton;
     Spinner dropdownSpinner;
-    LinearLayout selectedItemsLayout;
+    LinearLayout selectedItemsLayout, dropdownMenu;
     List<String> selectedItems;
-    Button popularBlogButton;
+
+    boolean isDropdownVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        popularBlogButton = findViewById(R.id.popular_blog_button);
-        popularBlogButton.setOnClickListener(new View.OnClickListener(){
+        dropdownMenu = findViewById(R.id.dropdown_menu_1);
+        getProfileButton = findViewById(R.id.profile_button);
+        getLogOutButton = findViewById(R.id.log_out_button);
+        getPopularBLogButton = findViewById(R.id.popular_blog_button);
+
+        getProfileButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(homePage.this, Profile.class );
+                startActivity(intent);
+
+            }
+        });
+
+
+        getPopularBLogButton.setOnClickListener(new View.OnClickListener(){
+
+
 
             @Override
             public void onClick(View v) {
@@ -46,35 +64,39 @@ public class homePage extends AppCompatActivity implements NavigationView.OnNavi
             }
         });
 
-
-        /*logOutButton =  findViewById(R.id.log_out_button);
-
-
-
-
-
-        logOutButton.setOnClickListener(new View.OnClickListener(){
+        getLogOutButton.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
+                SessionManager sessionManager = new SessionManager(getApplicationContext());
+                sessionManager.clearSession();
+
+
                 Intent intent = new Intent(homePage.this, MainActivity.class );
                 startActivity(intent);
+                finish();
 
             }
-        });*/
+        });
+
+        dropdownMenu = findViewById(R.id.dropdown_menu_1);
+        dropdownMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               if(isDropdownVisible) {
+                   dropdownMenu.setVisibility(View.GONE);
+                   isDropdownVisible = false;
+               }else{
+                   dropdownMenu.setVisibility(View.VISIBLE);
+                   isDropdownVisible = true;
+               }
+            }
+        });
 
 
-        // Find the DrawerLayout in the XML layout
-        drawer = findViewById(R.id.drawer_layout);
 
-        // Find the NavigationView in the XML layout
-        NavigationView navigationView = findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(this);
 
-        // Set up the ActionBarDrawerToggle to enable the sliding menu icon
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+
     }
 
     @Override

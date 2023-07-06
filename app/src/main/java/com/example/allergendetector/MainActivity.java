@@ -2,10 +2,12 @@ package com.example.allergendetector;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import com.bumptech.glide.Glide;
 
 import android.content.Intent;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -17,9 +19,15 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.load.resource.gif.GifDrawable;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -34,35 +42,45 @@ import org.w3c.dom.Text;
 public class MainActivity extends AppCompatActivity {
 
      EditText signInEmailEditText, signInPasswordEditText;
-     TextView headlineTextView;
+     TextView headlineTextView, signInTextView, signUpLink;
 
      private FirebaseAuth mAuth;
+     private SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Initializing session manager
+        sessionManager = new SessionManager(getApplicationContext());
+
+        //Check if user is already logged in
+        if(sessionManager.isLoggedIn()){
+            finish();
+            Intent intent = new Intent(MainActivity.this,homePage.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            return;
+        }
+
+
         //this code segment is to set the text color
         //of headline gradient brown.
-
+        signUpLink = findViewById(R.id.sign_up_link);
         headlineTextView = findViewById(R.id.title_textview);
+        signInTextView = findViewById(R.id.sign_in_textView);
+
+
         String text = "NoToNut";
-        SpannableString spannableString = new SpannableString(text);
-        int startColor = Color.parseColor("#A52A2A");
-        int endColor =  Color.parseColor("#8B4513");
+        String signInText = "Sign In";
+        String signUpLinkText = "Do not have an account? Sign Up !!";
 
-        LinearGradient gradient = new LinearGradient(0, 0, 0, headlineTextView.getTextSize(),
-                startColor, endColor, Shader.TileMode.CLAMP);
-
-        spannableString.setSpan(new ShaderSpan(gradient),
-                0,spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        headlineTextView.setText(spannableString);
+        GradientUtils.applyGradientColor(headlineTextView, text);
+        GradientUtils.applyGradientColor(signInTextView, signInText);
+        GradientUtils.applyGradientColor(signUpLink, signUpLinkText);
 
         WebView webView = findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
-
-
-
 
 
         webView.loadUrl("file:///android_asset/index.html");
@@ -93,6 +111,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
+        ImageView imageView = findViewById(R.id.homepage_icon);
+        Glide.with(this)
+                .asGif()
+                .load(R.drawable.home)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(imageView);
+
+
+
 
 
     }
@@ -128,7 +157,11 @@ public class MainActivity extends AppCompatActivity {
            @Override
            public void onComplete(@NonNull Task<AuthResult> task) {
                if(task.isSuccessful())
-               {   finish();
+               {   //save user credentials in session
+                   sessionManager.saveUserCredentials(signUpEmail, signUpPassword);
+
+                   //proceed to home screen
+                   finish();
                    Intent intent = new Intent(MainActivity.this, homePage.class );
                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                    startActivity(intent);

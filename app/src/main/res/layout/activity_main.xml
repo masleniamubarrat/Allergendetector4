@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="700dp"
     tools:context=".MainActivity"
-    android:layout_marginTop="20dp"
-    android:layout_marginBottom="20dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
     android:layout_marginStart="20dp"
     android:layout_marginEnd="20dp">
 
@@ -42,28 +43,30 @@
             android:id="@+id/sign_in_textView"
             android:layout_width="150dp"
             android:layout_height="30dp"
-            android:background="#FFFFFF"
+            android:textStyle="bold"
             android:text="sign in"
             android:textAlignment="center"
             android:textSize="20sp" />
 
         <EditText
             android:id="@+id/sign_in_email"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:background="#FFFFFF"
-            android:inputType="text"
-            android:hint="Username or email" />
+            android:textStyle="bold"
+            android:paddingStart="10dp"
+            android:hint="Username or email"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/sign_in_password"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:background="#FFFFFF"
+            android:paddingStart="10dp"
+            android:textStyle="bold"
             android:inputType=""
             android:hint="Password" />
 
@@ -81,7 +84,8 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="10dp"
-            android:text="do not have an account? sign up"
+            android:textStyle="bold"
+            android:text="@string/sign_up_link_text"
             android:textAlignment="center" />
 
         <WebView
@@ -94,7 +98,12 @@
 
 
     </LinearLayout>
-
+    
+    <ImageView
+        android:id="@+id/homepage_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/home"/>
 
 
 

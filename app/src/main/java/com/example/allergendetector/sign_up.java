@@ -1,21 +1,10 @@
 package com.example.allergendetector;
 
-import static android.content.ContentValues.TAG;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -24,28 +13,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.core.view.WindowCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.allergendetector.databinding.ActivitySignUpBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseUser;
-
-import org.w3c.dom.Text;
 
 import java.util.Calendar;
 
 public class sign_up extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
-    EditText signUpNameEditText, signUpEmailEditText,signUpPasswordEditText,signUpRetypePasswordEditText,datePickerEditText;
+    EditText signUpNameEditText, signUpPhoneNumberEditText, signUpEmailEditText,signUpPasswordEditText,signUpRetypePasswordEditText,datePickerEditText;
     Button signUpButton ;
-    TextView textView ;
+    TextView textView, signUpTextView,signInLinkTextView ;
     LinearLayout passwordRulesLayout;
     private boolean isPasswordFieldSelected = false;
     private boolean isPasswordValid = false;
@@ -56,18 +40,28 @@ public class sign_up extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
         mAuth = FirebaseAuth.getInstance();
 
-        datePickerEditText = findViewById(R.id.date_picker_edit_text);
 
+        datePickerEditText = findViewById(R.id.date_picker_edit_text);
+        signInLinkTextView = findViewById(R.id.sign_in_link);
+        signUpTextView = findViewById(R.id.sign_up_textView);
         signUpNameEditText = findViewById(R.id.sign_up_name);
         signUpEmailEditText = findViewById(R.id.sign_up_email);
         signUpPasswordEditText = findViewById(R.id.sign_up_password);
         signUpRetypePasswordEditText = findViewById(R.id.sign_up_retype_password);
         signUpButton = findViewById(R.id.sign_up_button);
         textView = findViewById(R.id.sign_in_link);
+        signUpPhoneNumberEditText = findViewById(R.id.sign_up_phone_number);
         passwordRulesLayout = findViewById(R.id.password_rules_layout);
         passwordRulesLayout.setVisibility(View.GONE);
+
+        String signUpText = "Sign Up";
+        String signInLinkText = "Already registered? Sign In !";
+
+        GradientUtils.applyGradientColor(signUpTextView, signUpText);
+        GradientUtils.applyGradientColor(signInLinkTextView,signInLinkText);
 
 
 
@@ -156,11 +150,24 @@ public class sign_up extends AppCompatActivity {
     private void userRegister() {
         String signUpEmail = signUpEmailEditText.getText().toString().trim();
         String signUpPassword = signUpPasswordEditText.getText().toString().trim();
-
+        String phoneNumber = signUpPhoneNumberEditText.getText().toString().trim();
         if(signUpEmail.isEmpty())
         {
             signUpEmailEditText.setError("Enter an email address");
             signUpEmailEditText.requestFocus();
+            return;
+        }
+
+        if (phoneNumber.isEmpty()) {
+            signUpPhoneNumberEditText.setError("Enter a phone number");
+            signUpPhoneNumberEditText.requestFocus();
+            return;
+        }
+
+        // Validate the phone number for Bangladesh
+        if (!isValidPhoneNumber(phoneNumber)) {
+            signUpPhoneNumberEditText.setError("Please insert a valid phone number");
+            signUpPhoneNumberEditText.requestFocus();
             return;
         }
 
@@ -178,6 +185,8 @@ public class sign_up extends AppCompatActivity {
             signUpPasswordEditText.requestFocus();
             return;
         }
+
+
 
 
         mAuth.createUserWithEmailAndPassword(signUpEmail, signUpPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -206,6 +215,10 @@ public class sign_up extends AppCompatActivity {
 
 
 
+    }
+    private boolean isValidPhoneNumber(String phoneNumber){
+        String regex = "^\\+?(?:880|0)1[3-9]\\d{8}$";
+        return phoneNumber.matches(regex);
     }
 
     public void showDatePickerDialog(View view) {
