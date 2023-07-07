@@ -21,13 +21,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 
 public class sign_up extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private DatabaseReference userRef;
 
-    EditText signUpNameEditText, signUpPhoneNumberEditText, signUpEmailEditText,signUpPasswordEditText,signUpRetypePasswordEditText,datePickerEditText;
+    EditText signUpNameEditText,signUpUsernameEditText, signUpPhoneNumberEditText, signUpEmailEditText,signUpPasswordEditText,signUpRetypePasswordEditText,datePickerEditText;
     Button signUpButton ;
     TextView textView, signUpTextView,signInLinkTextView ;
     LinearLayout passwordRulesLayout;
@@ -42,12 +46,14 @@ public class sign_up extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         mAuth = FirebaseAuth.getInstance();
-
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        userRef = database.getReference("users");
 
         datePickerEditText = findViewById(R.id.date_picker_edit_text);
         signInLinkTextView = findViewById(R.id.sign_in_link);
         signUpTextView = findViewById(R.id.sign_up_textView);
         signUpNameEditText = findViewById(R.id.sign_up_name);
+        signUpUsernameEditText = findViewById(R.id.user_name);
         signUpEmailEditText = findViewById(R.id.sign_up_email);
         signUpPasswordEditText = findViewById(R.id.sign_up_password);
         signUpRetypePasswordEditText = findViewById(R.id.sign_up_retype_password);
@@ -148,9 +154,12 @@ public class sign_up extends AppCompatActivity {
         );
     }
     private void userRegister() {
+        String signUpFullName = signUpNameEditText.getText().toString().trim();
+        String signUpUserName = signUpUsernameEditText.getText().toString().trim();
         String signUpEmail = signUpEmailEditText.getText().toString().trim();
         String signUpPassword = signUpPasswordEditText.getText().toString().trim();
         String phoneNumber = signUpPhoneNumberEditText.getText().toString().trim();
+        String birthDate = datePickerEditText.getText().toString().trim();
         if(signUpEmail.isEmpty())
         {
             signUpEmailEditText.setError("Enter an email address");
@@ -187,15 +196,25 @@ public class sign_up extends AppCompatActivity {
         }
 
 
-
+        /*String userId = userRef.push().getKey();
+        User user = new User(signUpFullName, signUpUserName,signUpEmail,phoneNumber, birthDate, signUpPassword);
+        userRef.child(userId).setPriority(user);*/
 
         mAuth.createUserWithEmailAndPassword(signUpEmail, signUpPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if (task.isSuccessful()) {
-                    Toast.makeText(getApplicationContext(),"Registered successfully", Toast.LENGTH_SHORT).show();
 
+                    FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                    if(firebaseUser != null) {
+                        String userId = firebaseUser.getUid();
+                        String key = userRef.push().getKey();
+                        User user = new User(signUpFullName,signUpUserName,signUpEmail,phoneNumber,birthDate,signUpPassword);
+                        userRef.child(key).setValue(user);
+
+                        Toast.makeText(getApplicationContext(), "Registered successfully", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     if(task.getException() instanceof FirebaseAuthUserCollisionException)
 
