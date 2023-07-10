@@ -5,113 +5,217 @@
     android:id="@+id/linear_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="10dp"
+    android:orientation="vertical"
     tools:context=".homePage">
 
-    <!-- Main content -->
     <LinearLayout
+        android:id="@+id/menu_layout"
+        android:orientation="horizontal"
+        android:background="@color/peach"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:id="@+id/dropdown_menu_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        android:layout_height="70dp">
+        <Button
+            android:id="@+id/menu_button"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/salmon"
+            android:textSize="20dp"
+            android:text="@string/menu" />
+        <Button
+            android:id="@+id/profile_button"
             android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/salmon"
+            android:textSize="20dp"
+            android:text="Profile" />
+
+        <Button
+            android:id="@+id/logOut_button"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/salmon"
+            android:textSize="20dp"
+            android:text="Log out" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/image_search_layout"
+        android:background="@color/peach"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical"
+        android:layout_height="120dp">
+
+        <ImageButton
+            android:id="@+id/search_image_icon"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="50dp"
+            android:layout_height="50dp">
+
+        </ImageButton>
+
+        <TextView
+            android:id="@+id/search_image_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search by image"
+            android:layout_marginStart="40dp"
+            android:layout_gravity="center">
+        </TextView>
+        <ImageView
+            android:id="@+id/search_image_imageView"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:gravity="end"
-            android:background="#FFB74D"> <!-- Light Orange Color -->
+            android:layout_marginStart="50dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp">
 
-            <Button
-                android:id="@+id/log_out_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Log Out" />
-
-            <Button
-                android:id="@+id/profile_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Profile" />
-
-            <Button
-                android:id="@+id/popular_blog_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Popular Blog" />
+        </ImageView>
 
 
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/image_search_result_layout"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:background="@color/peach"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
 
+        <TextView
+            android:id="@+id/search_result_food_name"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:background="@color/white"
+            android:text="Food name: "
+            android:paddingStart="3dp"
+            android:paddingTop="3dp"
+            android:layout_width="170dp"
+            android:layout_height="40dp">
 
+        </TextView>
+        <TextView
+            android:id="@+id/search_result_allergen_name"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:background="@color/white"
+            android:text="Allergen: "
+            android:paddingStart="3dp"
+            android:paddingTop="3dp"
+            android:layout_width="170dp"
+            android:layout_height="40dp">
 
-
-
-         </LinearLayout>
-
-         <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_marginStart="10dp"
-             android:layout_marginTop="10dp"
-             android:layout_marginEnd="10dp"
-             android:orientation="horizontal"
-             android:background="@drawable/search_bar_border">
-
-             <EditText
-                 android:id="@+id/searchBox"
-                 android:layout_width="361dp"
-                 android:layout_height="wrap_content"
-                 android:layout_weight="1"
-                 android:background="@drawable/edittext_background"
-                 android:drawableStart="@drawable/ic_search"
-                 android:drawablePadding="8dp"
-                 android:hint="Search"
-                 android:imeOptions="actionSearch"
-                 android:inputType="text"
-                 android:padding="8dp" />
-
-             <ImageView
-                 android:id="@+id/cameraButton"
-                 android:layout_width="48dp"
-                 android:layout_height="match_parent"
-                 android:background="?android:attr/selectableItemBackground"
-                 android:clickable="true"
-                 android:padding="12dp"
-                 android:src="@drawable/ic_camera" />
-
-         </LinearLayout>
-
-         <LinearLayout
-             android:id="@+id/drop_down_menu"
-             android:layout_marginTop="10dp"
-             android:layout_marginStart="10dp"
-             android:layout_marginEnd="10dp"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:orientation="vertical">
-
-             <Spinner
-                 android:id="@+id/dropdown_spinner"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content" />
-
-             <LinearLayout
-                 android:id="@+id/selected_items_layout"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:orientation="vertical"
-                 android:visibility="gone" />
-
-             <!-- Rest of your content here -->
-
-        </LinearLayout>
+        </TextView>
 
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/text_search_layout"
+        android:orientation="horizontal"
+        android:background="@color/peach"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
 
+        <SearchView
+
+            android:clickable="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:queryHint="type something"
+            android:background="@color/white"
+            android:layout_width="205dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:id="@+id/text_search_result"
+            android:background="@color/white"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_width="150dp"
+            android:layout_height="50dp">
+
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/review_and_chatGPT_layOut"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/review_layOut"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/review_text"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Was the result helpful?">
+
+            </TextView>
+
+            <ImageButton
+                android:id="@+id/like_button"
+                android:layout_marginStart="50dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+
+            </ImageButton>
+            <ImageButton
+                android:id="@+id/dislike_button"
+                android:layout_marginStart="20dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+
+            </ImageButton>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/chat_gpt_layOut"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="280dp">
+
+        <TextView
+            android:id="@+id/get_chat_gpt_text"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:text="Let chatGPT tell you more "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+
+           <TextView
+               android:id="@+id/chat_gpt_text_result"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+
+           </TextView>
+            <Button
+                android:id="@+id/ml_button"
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/salmon"
+                android:textSize="20dp"
+                android:text="go to demoML" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 </LinearLayout>

@@ -27,6 +27,7 @@
             <!-- Profile Picture LinearLayout -->
             <LinearLayout
                 android:id="@+id/profile_picture_linearLayout"
+                android:background="@color/peach"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:orientation="vertical">
@@ -58,6 +59,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/saddle_brown"
                         android:text="Change profile picture">
                     </TextView>
                 </LinearLayout>
@@ -67,11 +69,25 @@
             <!-- Personal Information LinearLayout -->
             <LinearLayout
                 android:id="@+id/personal_information_linearLayout"
+                android:layout_marginTop="10dp"
+                android:background="@color/peach"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/name_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/user_name_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/email_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/date_of_birth_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -80,9 +96,22 @@
             <!-- Allergen List LinearLayout -->
             <LinearLayout
                 android:id="@+id/Allergen_and_foodlist_linearLayout"
+                android:layout_marginTop="10dp"
+                android:background="@color/peach"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:orientation="vertical">
+                <TextView
+                    android:id="@+id/your_list_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Your List"
+                    android:textSize="50dp"
+                    android:clickable="true"
+                    android:onClick="openAllergenList">
+
+                </TextView>
+
 
                 <!-- Add your allergen list views here -->
 
@@ -90,15 +119,5 @@
 
         </LinearLayout>
 
-
-
-
     </androidx.cardview.widget.CardView>
-
-
-
-
-
-
-
 </LinearLayout>

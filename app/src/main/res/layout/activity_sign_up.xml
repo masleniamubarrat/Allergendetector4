@@ -152,6 +152,7 @@
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/saddle_brown"
             android:text="Sign up"/>
 
         <TextView
@@ -159,6 +160,7 @@
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/saddle_brown"
             android:text="Already registered ? Sign in!"
             android:textAlignment="center"/>
 

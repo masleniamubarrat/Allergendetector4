@@ -1,8 +1,7 @@
 package com.example.allergendetector;
 
 public class User {
-    private  String fullName,userName, email,
-            phoneNumber,birthDate, passWord;
+    private  String birthDate, email, fullName, passWord, phoneNumber,userName;
     //this default constructor is required for Firebase
     public User(){
 
@@ -53,5 +52,6 @@ public class User {
     public void setPassword(){
         this.passWord = passWord;
     }
+
 
 }
