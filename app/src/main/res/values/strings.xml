@@ -54,6 +54,7 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="about_us">"Welcome to our app! We are dedicated to providing you with a convenient and reliable tool to identify allergens in food. Our app utilizes advanced machine learning techniques to analyze food items and determine if they contain any allergens. With a simple snap of a photo, you can quickly discover if a food product is safe for you. We aim to empower individuals with allergies to make informed choices and promote a safer and healthier lifestyle."</string>
     <string name="sign_up_link_text">do not have an account? sign up</string>
     <string name="menu">Menu</string>
 </resources>

@@ -120,31 +120,43 @@
 
     <LinearLayout
         android:id="@+id/text_search_layout"
-        android:orientation="horizontal"
-        android:background="@color/peach"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="70dp">
+        android:layout_height="82dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/peach"
+        android:orientation="horizontal">
 
         <SearchView
-
-            android:clickable="true"
-            android:layout_marginTop="10dp"
+            android:id="@+id/text_search_search_view"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
             android:layout_marginStart="10dp"
-            android:queryHint="type something"
+            android:layout_marginTop="10dp"
             android:background="@color/white"
-            android:layout_width="205dp"
-            android:layout_height="50dp" />
+            android:clickable="true"
+            android:queryHint="type something" />
+
         <TextView
             android:id="@+id/text_search_result"
-            android:background="@color/white"
-            android:layout_marginTop="10dp"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
             android:layout_marginStart="10dp"
-            android:layout_width="150dp"
-            android:layout_height="50dp">
+            android:layout_marginTop="10dp"
+            android:background="@color/white">
 
         </TextView>
+
     </LinearLayout>
+    <Button
+        android:id="@+id/search_button"
+        android:text="search"
+        android:backgroundTint="@color/antique_white"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </Button>
+
     <LinearLayout
         android:orientation="vertical"
         android:id="@+id/review_and_chatGPT_layOut"
@@ -213,6 +225,23 @@
                 android:backgroundTint="@color/salmon"
                 android:textSize="20dp"
                 android:text="go to demoML" />
+            <Button
+                android:id="@+id/about_us_button"
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/salmon"
+                android:textSize="20dp"
+                android:text="About Us" />
+
+            <Button
+                android:id="@+id/demoProfile"
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/salmon"
+                android:textSize="20dp"
+                android:text="demo profile" />
         </LinearLayout>
 
     </LinearLayout>

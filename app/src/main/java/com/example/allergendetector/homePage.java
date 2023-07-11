@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -30,6 +31,11 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +53,10 @@ public class homePage extends AppCompatActivity  {
     private TextView foodNameTextView, allergenTextView;
     LinearLayout getImageLayout;
     private ActivityResultLauncher<Intent> cameraLauncher;
+    private DatabaseReference databaseRef;
+    private List<FoodItem> foodItemList;
+    private TextView textSearchResult;
+    private SearchView textSearchView;
 
 
 
@@ -56,6 +66,24 @@ public class homePage extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        databaseRef = FirebaseDatabase.getInstance().getReference("List");
+        textSearchResult = findViewById(R.id.text_search_result);
+        textSearchView = findViewById(R.id.text_search_search_view);
+
+        Button searchButton = findViewById(R.id.search_button);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String query = textSearchView.getQuery().toString().trim();
+                searchFoodItem(query);
+            }
+        });
+
+        // Retrieve data from Firebase Realtime Database
+        retrieveData();
+
+
 
         findViewById(R.id.logOut_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +116,31 @@ public class homePage extends AppCompatActivity  {
             public void onClick(View v) {
 
 
-                Intent intent = new Intent(homePage.this, demoML.class);
+                Intent intent = new Intent(homePage.this,demoMl.class);
+                startActivity(intent);
+
+
+            }
+        });
+
+        findViewById(R.id.about_us_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(homePage.this,AboutUs.class);
+                startActivity(intent);
+
+
+            }
+        });
+
+        findViewById(R.id.demoProfile).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(homePage.this,demoProfile.class);
                 startActivity(intent);
 
 
@@ -96,13 +148,40 @@ public class homePage extends AppCompatActivity  {
         });
 
 
-
-
-
-
-
-
     }
+    private void retrieveData() {
+        databaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                foodItemList = new ArrayList<>();
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String foodItemName = snapshot.child("Food Item").getValue(String.class);
+                    String allergens = snapshot.child("Allergen(s)").getValue(String.class);
+
+                    FoodItem foodItem = new FoodItem(foodItemName, allergens);
+                    foodItemList.add(foodItem);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle database error
+            }
+        });
+    }
+    private void searchFoodItem(String query) {
+        for (FoodItem foodItem : foodItemList) {
+            if (foodItem.getFoodItemName().equalsIgnoreCase(query)) {
+                textSearchResult.setText(foodItem.getAllergens());
+                return; // Exit the loop once a match is found
+            }
+        }
+
+        // If no match is found
+        textSearchResult.setText("No allergen, safe to eat.");
+    }
+
 
 
     }

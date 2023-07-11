@@ -160,6 +160,8 @@ public class sign_up extends AppCompatActivity {
         String signUpPassword = signUpPasswordEditText.getText().toString().trim();
         String phoneNumber = signUpPhoneNumberEditText.getText().toString().trim();
         String birthDate = datePickerEditText.getText().toString().trim();
+        String review = null;
+        int rating = 0;
         if(signUpEmail.isEmpty())
         {
             signUpEmailEditText.setError("Enter an email address");
@@ -210,8 +212,8 @@ public class sign_up extends AppCompatActivity {
                     if(firebaseUser != null) {
                         String userId = firebaseUser.getUid();
                         String key = userRef.push().getKey();
-                        User user = new User(signUpFullName,signUpUserName,signUpEmail,phoneNumber,birthDate,signUpPassword);
-                        userRef.child(key).setValue(user);
+                        User user = new User(signUpFullName,signUpUserName,signUpEmail,phoneNumber,birthDate,signUpPassword, null,rating);
+                        userRef.child(userId).setValue(user);
 
                         Toast.makeText(getApplicationContext(), "Registered successfully", Toast.LENGTH_SHORT).show();
                     }

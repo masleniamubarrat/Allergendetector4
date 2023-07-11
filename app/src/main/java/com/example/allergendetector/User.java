@@ -1,19 +1,24 @@
 package com.example.allergendetector;
 
 public class User {
-    private  String birthDate, email, fullName, passWord, phoneNumber,userName;
+    private  String birthDate, email, fullName, passWord, phoneNumber,userName, review;
+    int rating;
+
     //this default constructor is required for Firebase
     public User(){
 
     }
     public User(String fullName,String userName,
-                String email, String phoneNumber,String birthDate, String passWord) {
+                String email, String phoneNumber,String birthDate, String passWord, String review, int rating) {
         this.fullName = fullName;
         this.userName = userName;
         this.birthDate= birthDate;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.passWord = passWord;
+        this.rating = 0;
+        this.review = "";
+
     }
     public String getFullName(){
         return fullName;
@@ -52,6 +57,22 @@ public class User {
     public void setPassword(){
         this.passWord = passWord;
     }
+    public int getRating(){
+        return rating;
+    }
+    public void setRating(int rating){
+        this.rating = rating;
+    }
+
+
+    public String getReview(){
+        return review;
+    }
+    public void setReview(){
+        this.review = review;
+    }
+
+
 
 
 }
