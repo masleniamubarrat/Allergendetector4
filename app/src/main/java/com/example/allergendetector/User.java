@@ -1,15 +1,18 @@
 package com.example.allergendetector;
 
+import android.media.Image;
+
 public class User {
     private  String birthDate, email, fullName, passWord, phoneNumber,userName, review;
     int rating;
+    private String profilePictureUrl;
 
     //this default constructor is required for Firebase
     public User(){
 
     }
-    public User(String fullName,String userName,
-                String email, String phoneNumber,String birthDate, String passWord, String review, int rating) {
+    public User(String fullName, String userName,
+                String email, String phoneNumber, String birthDate, String passWord, String review, int rating,String profilePictureUrl) {
         this.fullName = fullName;
         this.userName = userName;
         this.birthDate= birthDate;
@@ -18,6 +21,7 @@ public class User {
         this.passWord = passWord;
         this.rating = 0;
         this.review = "";
+        this.profilePictureUrl="";
 
     }
     public String getFullName(){
@@ -70,6 +74,13 @@ public class User {
     }
     public void setReview(){
         this.review = review;
+    }
+    public String getProfilePictureUrl() {
+        return profilePictureUrl;
+    }
+
+    public void setProfilePictureUrl(String profilePictureUrl) {
+        this.profilePictureUrl = profilePictureUrl;
     }
 
 
