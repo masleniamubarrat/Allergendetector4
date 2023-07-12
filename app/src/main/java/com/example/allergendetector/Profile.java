@@ -4,6 +4,8 @@ package com.example.allergendetector;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
@@ -14,6 +16,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,6 +36,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.w3c.dom.Text;
 
@@ -42,9 +47,14 @@ public class Profile extends AppCompatActivity {
     LinearLayout getProfileLinearLayout, getProfilePictureLinearLayout, getChangePictureLayOut,
             getPersonalInformationLayout, getAllergenAndFoodListLinearLayout;
     ImageView getProfilePictureImageView, getChangePictureIcon;
+    RecyclerView itemListRecyclerView;
+    EditText itemInputEditText;
+    Button addItemButton;
+    ItemListAdapter itemListAdapter;
     Button saveButton;
     Uri selectedImageUri;
     boolean isImageSelected = false;
+    private ArrayList<String> itemList;
     User user;
     private static final int PICK_IMAGE_REQUEST = 1;
 
@@ -52,6 +62,8 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
 
         getProfilePictureImageView = findViewById(R.id.profile_picture_imageView);
         getNameTextView = findViewById(R.id.name_textview);
@@ -61,6 +73,24 @@ public class Profile extends AppCompatActivity {
         getProfileLinearLayout = findViewById(R.id.profile_linearLayout);
         getPersonalInformationLayout = findViewById(R.id.personal_information_linearLayout);
         saveButton = findViewById(R.id.save_button);
+        // Inside onCreate method
+
+
+
+
+
+
+
+// Implement toggleItemInput method
+
+
+
+
+
+
+
+
+// Find EditText and Button
 
         // Initialize the User object
         user = new User();
@@ -101,33 +131,41 @@ public class Profile extends AppCompatActivity {
 
     private void uploadImage() {
         if (selectedImageUri != null) {
-            StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-            StorageReference imageRef = storageRef.child("profile_pictures/" + user.getProfilePictureUrl() + ".jpg");
+            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+            if (currentUser != null) {
+                String uid = currentUser.getUid();
+                StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+                StorageReference imageRef = storageRef.child("profile_pictures/" + uid + ".jpg");
 
-            imageRef.putFile(selectedImageUri)
-                    .addOnSuccessListener(taskSnapshot -> {
-                        imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                            String downloadUrl = uri.toString();
-                            user.setProfilePictureUrl(downloadUrl);
+                imageRef.putFile(selectedImageUri)
+                        .addOnSuccessListener(taskSnapshot -> {
+                            imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                                String downloadUrl = uri.toString();
 
-                            // Update the user's profile in the Firebase Realtime Database
-                            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(user.getProfilePictureUrl());
-                            userRef.setValue(user)
-                                    .addOnSuccessListener(aVoid -> {
-                                        // Profile update successful
-                                        Toast.makeText(this, "Profile picture uploaded successfully!", Toast.LENGTH_SHORT).show();
-                                    })
-                                    .addOnFailureListener(e -> {
-                                        // Profile update failed, handle the error
-                                        Toast.makeText(this, "Failed to update profile: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    });
+                                // Update the user's profile picture URL in the Firebase Realtime Database
+                                DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(uid);
+                                userRef.child("profilePictureUrl").setValue(downloadUrl)
+                                        .addOnSuccessListener(aVoid -> {
+                                            // Profile picture URL stored in the database
+                                            Toast.makeText(this, "Profile picture uploaded successfully!", Toast.LENGTH_SHORT).show();
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            // Failed to store profile picture URL in the database, handle the error
+                                            Toast.makeText(this, "Failed to update profile: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        });
+                            });
+                        })
+                        .addOnFailureListener(e -> {
+                            // Failed to upload image, handle the error
+                            Toast.makeText(this, "Failed to upload image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         });
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(this, "Failed to upload image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    });
+            }
         }
     }
+
+
+
+
 
     private void retrieveUserData() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -136,6 +174,7 @@ public class Profile extends AppCompatActivity {
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(uid);
 
             databaseReference.addValueEventListener(new ValueEventListener() {
+
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
@@ -152,9 +191,13 @@ public class Profile extends AppCompatActivity {
                             getUserNameTextView.setText(userName);
                             getEmailTextView.setText(email);
                             getDateOfBirthTextView.setText(dateOfBirth);
+
+                            // Load the profile picture
+                            loadProfilePicture();
                         }
                     }
                 }
+
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
@@ -172,4 +215,9 @@ public class Profile extends AppCompatActivity {
                     .into(getProfilePictureImageView);
         }
     }
+
+
+
+
+
 }

@@ -33,7 +33,7 @@
                     android:layout_width="123dp"
                     android:layout_height="150dp"
                     android:layout_marginStart="125dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="30dp"
                     android:src="@drawable/profile">
 
@@ -88,56 +88,37 @@
 
 
             <!-- Personal Information LinearLayout -->
-            <LinearLayout
-                android:id="@+id/personal_information_linearLayout"
-                android:layout_marginTop="10dp"
-                android:background="@color/peach"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/name_textview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:id="@+id/user_name_textview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:id="@+id/email_textview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:id="@+id/date_of_birth_textview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:id="@+id/personal_information_linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/peach"
+        android:orientation="vertical">
 
-            </LinearLayout>
+        <TextView
+            android:id="@+id/name_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-            <!-- Allergen List LinearLayout -->
-            <LinearLayout
-                android:id="@+id/Allergen_and_foodlist_linearLayout"
-                android:layout_marginTop="10dp"
-                android:background="@color/peach"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/your_list_textview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Your List"
-                    android:textSize="50dp"
-                    android:clickable="true"
-                    android:onClick="openAllergenList">
+        <TextView
+            android:id="@+id/user_name_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-                </TextView>
+        <TextView
+            android:id="@+id/email_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
+        <TextView
+            android:id="@+id/date_of_birth_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-                <!-- Add your allergen list views here -->
+    </LinearLayout>
 
-            </LinearLayout>
+    </LinearLayout>
 
-        </LinearLayout>
 
 

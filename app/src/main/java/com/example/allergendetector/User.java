@@ -2,17 +2,22 @@ package com.example.allergendetector;
 
 import android.media.Image;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     private  String birthDate, email, fullName, passWord, phoneNumber,userName, review;
     int rating;
     private String profilePictureUrl;
+    private List<String> itemList;
 
     //this default constructor is required for Firebase
     public User(){
+        itemList = new ArrayList<>();
 
     }
     public User(String fullName, String userName,
-                String email, String phoneNumber, String birthDate, String passWord, String review, int rating,String profilePictureUrl) {
+                String email, String phoneNumber, String birthDate, String passWord, String review, int rating,String profilePictureUrl, List itemList) {
         this.fullName = fullName;
         this.userName = userName;
         this.birthDate= birthDate;
@@ -22,6 +27,7 @@ public class User {
         this.rating = 0;
         this.review = "";
         this.profilePictureUrl="";
+        this.itemList = new ArrayList<>();
 
     }
     public String getFullName(){
@@ -81,6 +87,13 @@ public class User {
 
     public void setProfilePictureUrl(String profilePictureUrl) {
         this.profilePictureUrl = profilePictureUrl;
+    }
+    public List<String> getItemList() {
+        return itemList;
+    }
+
+    public void addItemToList(String item) {
+        itemList.add(item);
     }
 
 

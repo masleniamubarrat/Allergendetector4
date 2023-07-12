@@ -25,7 +25,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class sign_up extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -162,6 +164,7 @@ public class sign_up extends AppCompatActivity {
         String birthDate = datePickerEditText.getText().toString().trim();
         String review = null;
         String profilePictureUrl="";
+        List<String> itemList = new ArrayList<>();;
         int rating = 0;
         if(signUpEmail.isEmpty())
         {
@@ -215,7 +218,7 @@ public class sign_up extends AppCompatActivity {
                         String key = userRef.push().getKey();
 
 
-                        User user = new User(signUpFullName,signUpUserName,signUpEmail,phoneNumber,birthDate,signUpPassword, null,rating,profilePictureUrl);
+                        User user = new User(signUpFullName,signUpUserName,signUpEmail,phoneNumber,birthDate,signUpPassword, null,rating,profilePictureUrl,itemList);
                         userRef.child(userId).setValue(user);
 
                         Toast.makeText(getApplicationContext(), "Registered successfully", Toast.LENGTH_SHORT).show();

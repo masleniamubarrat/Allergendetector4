@@ -80,7 +80,8 @@
                 android:layout_height="wrap_content"
                 android:numStars="5"
                 android:stepSize="1"
-                android:rating="0">
+                android:rating="0"
+                android:isIndicator="false">
 
             </RatingBar>
 
@@ -118,7 +119,44 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/review_layout"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/review_textView"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Leave us a review !         ">
+
+        </TextView>
+        <EditText
+            android:id="@+id/review_editText"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+        </EditText>
+        <Button
+            android:id="@+id/review_submit_button"
+            android:visibility="gone"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/peach"
+            android:text="Submit"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </Button>
 
 
+
+    </LinearLayout>
 
 </LinearLayout>
