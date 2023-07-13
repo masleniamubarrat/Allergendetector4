@@ -18,13 +18,7 @@
         android:background="@color/peach"
         android:layout_width="match_parent"
         android:layout_height="70dp">
-        <Button
-            android:id="@+id/menu_button"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:backgroundTint="@color/salmon"
-            android:textSize="20dp"
-            android:text="@string/menu" />
+
         <Button
             android:id="@+id/profile_button"
             android:layout_marginStart="10dp"
@@ -32,7 +26,21 @@
             android:layout_height="60dp"
             android:backgroundTint="@color/salmon"
             android:textSize="20dp"
-            android:text="Profile" />
+            android:text="Profile" >
+
+        </Button>
+
+        <Button
+            android:id="@+id/about_us_button"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/salmon"
+            android:textSize="20dp"
+            android:text="About Us">
+
+        </Button>
+
 
         <Button
             android:id="@+id/logOut_button"
@@ -134,7 +142,9 @@
             android:layout_marginTop="10dp"
             android:background="@color/white"
             android:clickable="true"
-            android:queryHint="type something" />
+            android:queryHint="type something" >
+
+        </SearchView>
 
         <TextView
             android:id="@+id/text_search_result"
@@ -156,6 +166,12 @@
         android:layout_height="wrap_content">
 
     </Button>
+    <TextView
+        android:id="@+id/like"
+        android:layout_width="50dp"
+        android:layout_height="10dp">
+
+    </TextView>
 
     <LinearLayout
         android:orientation="vertical"
@@ -181,15 +197,23 @@
             </TextView>
 
             <ImageButton
+
                 android:id="@+id/like_button"
+                android:clickable="true"
+                android:src="@drawable/like"
+                android:backgroundTint="@color/white"
                 android:layout_marginStart="50dp"
                 android:layout_width="50dp"
                 android:layout_height="50dp">
 
             </ImageButton>
             <ImageButton
+
                 android:id="@+id/dislike_button"
+                android:clickable="true"
                 android:layout_marginStart="20dp"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/dislike"
                 android:layout_width="50dp"
                 android:layout_height="50dp">
 
@@ -225,14 +249,7 @@
                 android:backgroundTint="@color/salmon"
                 android:textSize="20dp"
                 android:text="go to demoML" />
-            <Button
-                android:id="@+id/about_us_button"
-                android:layout_marginStart="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:backgroundTint="@color/salmon"
-                android:textSize="20dp"
-                android:text="About Us" />
+
 
             <Button
                 android:id="@+id/demoProfile"

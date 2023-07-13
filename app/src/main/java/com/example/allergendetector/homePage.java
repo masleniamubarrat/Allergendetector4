@@ -1,5 +1,6 @@
 package com.example.allergendetector;
 
+import static com.example.allergendetector.R.id.like;
 import static com.example.allergendetector.R.id.menu_item_1;
 
 import android.content.Intent;
@@ -31,6 +32,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -57,8 +60,11 @@ public class homePage extends AppCompatActivity  {
     private List<FoodItem> foodItemList;
     private TextView textSearchResult;
     private SearchView textSearchView;
+    private ImageButton likeButton, dislikeButton;
+    private int likeCount = 0;
+    private DatabaseReference currentUserRef;
 
-
+     private  TextView likeText;
 
 
 
@@ -66,6 +72,73 @@ public class homePage extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+        likeText = findViewById(R.id.like);
+
+        likeButton = findViewById(R.id.like_button);
+        dislikeButton = findViewById(R.id.dislike_button);
+
+        // Disable image buttons initially
+        likeButton.setEnabled(false);
+        dislikeButton.setEnabled(false);
+
+        // Set initial image resource for likeButton and dislikeButton
+        likeButton.setImageResource(R.drawable.like);
+        dislikeButton.setImageResource(R.drawable.dislike);
+
+        findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                likeButton.setEnabled(true);
+                dislikeButton.setEnabled(true);
+
+                String query = textSearchView.getQuery().toString().trim();
+                searchFoodItem(query);
+
+            }
+        });
+
+
+        // Retrieve the current user's data from Firebase Realtime Database
+        retrieveUserData();
+
+        // Set click listeners for likeButton and dislikeButton
+        likeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                likeButton.setImageResource(R.drawable.liked);
+                likeCount++;
+                // Update like count in Firebase Realtime Database for the current user
+                updateLikeCount(likeCount);
+                // Update image resource for likeButton
+
+                // Disable dislikeButton
+                dislikeButton.setEnabled(false);
+                // Disable both likeButton and dislikeButton
+                likeButton.setEnabled(false);
+            }
+        });
+
+        dislikeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dislikeButton.setImageResource(R.drawable.disliked);
+                if (likeCount > 0) {
+                    likeCount--;
+                    // Update like count in Firebase Realtime Database for the current user
+                    updateLikeCount(likeCount);
+                }
+                // Update image resource for likeButton
+                likeButton.setImageResource(R.drawable.like);
+                // Disable dislikeButton
+                dislikeButton.setEnabled(false);
+                // Disable both likeButton and dislikeButton
+                likeButton.setEnabled(false);
+            }
+        });
+
+
+
+
 
         databaseRef = FirebaseDatabase.getInstance().getReference("List");
         textSearchResult = findViewById(R.id.text_search_result);
@@ -182,9 +255,47 @@ public class homePage extends AppCompatActivity  {
         textSearchResult.setText("No allergen, safe to eat.");
     }
 
+    private void retrieveUserData() {
+        // Get the current user's ID (replace with the actual method to retrieve the user ID)
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        String userId = currentUser.getUid();
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+        currentUserRef = usersRef.child(userId);
 
+        currentUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Integer userLikeCount = dataSnapshot.child("like").getValue(Integer.class);
+                    if (userLikeCount != null) {
+                        likeCount = userLikeCount;
+                        likeText.setText(likeCount);
+
+
+                    }
+                } else{ String noData = " no data ";
+                    likeText.setText(noData);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle database error
+            }
+        });
 
     }
+
+    private void updateLikeCount(int likeCount) {
+        // Update the "like" attribute value in the user's data
+        currentUserRef.child("like").setValue(likeCount);
+    }
+
+
+
+
+}
 
 
 

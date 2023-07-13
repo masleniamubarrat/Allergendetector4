@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        app:showAsAction="always"
+        android:title=" ">
+
+        <menu>
+            <item
+                android:id="@+id/profile_button"
+                android:title="Profile"
+                app:showAsAction="never">
+
+            </item>
+
+            <item
+                android:id="@+id/logOut_button"
+                android:title="Log Out"
+                app:showAsAction="never">
+
+            </item>
+
+            <item
+                android:id="@+id/abut_us_button"
+                android:title="About Us"
+                app:showAsAction="never">
+
+            </item>
+
+        </menu>
+
+    </item>
+
+</menu>

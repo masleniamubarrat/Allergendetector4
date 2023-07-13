@@ -7,7 +7,7 @@ import java.util.List;
 
 public class User {
     private  String birthDate, email, fullName, passWord, phoneNumber,userName, review;
-    int rating;
+    int rating, like;
     private String profilePictureUrl;
     private List<String> itemList;
 
@@ -17,7 +17,7 @@ public class User {
 
     }
     public User(String fullName, String userName,
-                String email, String phoneNumber, String birthDate, String passWord, String review, int rating,String profilePictureUrl, List itemList) {
+                String email, String phoneNumber, String birthDate, String passWord, String review, int rating,String profilePictureUrl, List itemList,int like) {
         this.fullName = fullName;
         this.userName = userName;
         this.birthDate= birthDate;
@@ -28,6 +28,7 @@ public class User {
         this.review = "";
         this.profilePictureUrl="";
         this.itemList = new ArrayList<>();
+        this.like = 0;
 
     }
     public String getFullName(){
@@ -94,6 +95,13 @@ public class User {
 
     public void addItemToList(String item) {
         itemList.add(item);
+    }
+
+    public int getLike(){
+        return like;
+    }
+    public void setLike(){
+        this.like = like;
     }
 
 

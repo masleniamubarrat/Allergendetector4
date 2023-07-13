@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -113,7 +114,7 @@ public class sign_up extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                  validatePassword(s.toString());
+                validatePassword(s.toString());
             }
 
             @Override
@@ -166,6 +167,7 @@ public class sign_up extends AppCompatActivity {
         String profilePictureUrl="";
         List<String> itemList = new ArrayList<>();;
         int rating = 0;
+        int like = 0;
         if(signUpEmail.isEmpty())
         {
             signUpEmailEditText.setError("Enter an email address");
@@ -218,7 +220,7 @@ public class sign_up extends AppCompatActivity {
                         String key = userRef.push().getKey();
 
 
-                        User user = new User(signUpFullName,signUpUserName,signUpEmail,phoneNumber,birthDate,signUpPassword, null,rating,profilePictureUrl,itemList);
+                        User user = new User(signUpFullName,signUpUserName,signUpEmail,phoneNumber,birthDate,signUpPassword, null,rating,profilePictureUrl,itemList, like);
                         userRef.child(userId).setValue(user);
 
                         Toast.makeText(getApplicationContext(), "Registered successfully", Toast.LENGTH_SHORT).show();
@@ -268,4 +270,3 @@ public class sign_up extends AppCompatActivity {
         datePickerDialog.show();
     }
 }
-
