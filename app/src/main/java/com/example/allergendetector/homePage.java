@@ -270,7 +270,7 @@ public class homePage extends AppCompatActivity  {
                     Integer userLikeCount = dataSnapshot.child("like").getValue(Integer.class);
                     if (userLikeCount != null) {
                         likeCount = userLikeCount;
-                        likeText.setText(likeCount);
+                        likeText.setText(String.valueOf(likeCount));;
 
 
                     }

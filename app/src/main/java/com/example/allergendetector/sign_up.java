@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -208,43 +209,51 @@ public class sign_up extends AppCompatActivity {
         User user = new User(signUpFullName, signUpUserName,signUpEmail,phoneNumber, birthDate, signUpPassword);
         userRef.child(userId).setPriority(user);*/
 
-        mAuth.createUserWithEmailAndPassword(signUpEmail, signUpPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+        mAuth.fetchSignInMethodsForEmail(signUpEmail)
+                .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                        boolean isNewUser = task.getResult().getSignInMethods().isEmpty();
 
-                if (task.isSuccessful()) {
+                        if (isNewUser) {
+                            // Email is not registered, proceed with registration
+                            mAuth.createUserWithEmailAndPassword(signUpEmail, signUpPassword)
+                                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            if (task.isSuccessful()) {
+                                                // Registration successful, save user data to Firebase Realtime Database
+                                                FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                                                if (firebaseUser != null) {
+                                                    String userId = firebaseUser.getUid();
+                                                    String key = userRef.push().getKey();
+                                                    User user = new User(signUpFullName, signUpUserName, signUpEmail, phoneNumber, birthDate, signUpPassword, null, rating, profilePictureUrl, itemList, like);
+                                                    userRef.child(userId).setValue(user);
+                                                    Toast.makeText(getApplicationContext(), "Registered successfully", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(sign_up.this, homePage.class );
+                                                    startActivity(intent);
 
-                    FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                    if(firebaseUser != null) {
-                        String userId = firebaseUser.getUid();
-                        String key = userRef.push().getKey();
-
-
-                        User user = new User(signUpFullName,signUpUserName,signUpEmail,phoneNumber,birthDate,signUpPassword, null,rating,profilePictureUrl,itemList, like);
-                        userRef.child(userId).setValue(user);
-
-                        Toast.makeText(getApplicationContext(), "Registered successfully", Toast.LENGTH_SHORT).show();
+                                                }
+                                            } else {
+                                                // Registration failed
+                                                Toast.makeText(getApplicationContext(), "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                        } else {
+                            // Email is already registered
+                            Toast.makeText(getApplicationContext(), "Email is already registered", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                } else {
-                    if(task.getException() instanceof FirebaseAuthUserCollisionException)
-
-                    {Toast.makeText(getApplicationContext(),"User is already registered", Toast.LENGTH_SHORT).show();}
-
-                    else{
-                        Toast.makeText(getApplicationContext(),"Error :"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-
-            }
-        });
-
-        Intent intent = new Intent(sign_up.this, homePage.class );
-        startActivity(intent);
-
-
+                });
 
     }
+
+
+
+
+
+
     private boolean isValidPhoneNumber(String phoneNumber){
         String regex = "^\\+?(?:880|0)1[3-9]\\d{8}$";
         return phoneNumber.matches(regex);
