@@ -18,7 +18,16 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="20dp"
-        android:background="#FFCC80">
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/title_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/no_to_nut"
+            android:layout_gravity="center_horizontal">
+
+        </ImageView>
 
         <TextView
 
@@ -102,41 +111,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
-                android:drawableStart="@drawable/ic_cross"
+                android:drawableStart="@drawable/cross"
                 android:text="Min length 7"
-                android:textColor="#FF0000" />
+                android:textColor="@color/saddle_brown" />
 
             <TextView
                 android:id="@+id/password_no_space"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
-                android:drawableStart="@drawable/ic_cross"
+                android:drawableStart="@drawable/cross"
                 android:text="No space"
-                android:textColor="#FF0000" />
+                android:textColor="@color/saddle_brown" />
             <TextView
                 android:id="@+id/password_at_least_one_digit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
-                android:drawableStart="@drawable/ic_cross"
+                android:drawableStart="@drawable/cross"
                 android:text="At least one digit"
-                android:textColor="#FF0000" />
+                android:textColor="@color/saddle_brown" />
 
             <TextView
                 android:id="@+id/password_only_one_special_char"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
-                android:drawableStart="@drawable/ic_cross"
+                android:drawableStart="@drawable/cross"
                 android:text="Only one special character"
-                android:textColor="#FF0000" />
+                android:textColor="@color/saddle_brown" />
 
 
 
 
         </LinearLayout>
-
         <EditText
             android:inputType=""
             android:layout_marginStart="10dp"
@@ -154,6 +162,8 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/saddle_brown"
             android:text="Sign up"/>
+
+
 
         <TextView
             android:id="@+id/sign_in_link"

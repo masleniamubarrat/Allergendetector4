@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
@@ -13,6 +14,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
      EditText signInEmailEditText, signInPasswordEditText;
      TextView headlineTextView, signInTextView, signUpLink;
+     ImageView titleImage;
 
      private FirebaseAuth mAuth;
      private SessionManager sessionManager;
@@ -51,7 +54,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Initializing session manager
+
+        titleImage = findViewById(R.id.title_image);
+
+
+
+
+    //Initializing session manager
         sessionManager = new SessionManager(getApplicationContext());
 
         //Check if user is already logged in
@@ -113,12 +122,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        ImageView imageView = findViewById(R.id.homepage_icon);
-        Glide.with(this)
-                .asGif()
-                .load(R.drawable.home)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(imageView);
+
 
 
 

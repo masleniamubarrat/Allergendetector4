@@ -14,42 +14,39 @@
 
     <LinearLayout
         android:id="@+id/menu_layout"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:background="@color/peach"
         android:layout_width="match_parent"
         android:layout_height="70dp">
 
-        <Button
+        <ImageButton
             android:id="@+id/profile_button"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="50dp"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:backgroundTint="@color/salmon"
-            android:textSize="20dp"
-            android:text="Profile" >
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/profile_logo_1">
 
-        </Button>
+        </ImageButton>
 
-        <Button
+        <ImageButton
             android:id="@+id/about_us_button"
-            android:layout_marginStart="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:backgroundTint="@color/salmon"
-            android:textSize="20dp"
-            android:text="About Us">
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/about_us_1">
 
-        </Button>
-
-
-        <Button
+        </ImageButton>
+        <ImageButton
             android:id="@+id/logOut_button"
-            android:layout_marginStart="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:backgroundTint="@color/salmon"
-            android:textSize="20dp"
-            android:text="Log out" />
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/log_out_1">
+
+        </ImageButton>
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -258,7 +255,7 @@
                 android:layout_height="60dp"
                 android:backgroundTint="@color/salmon"
                 android:textSize="20dp"
-                android:text="demo profile" />
+                android:text="Review" />
         </LinearLayout>
 
     </LinearLayout>

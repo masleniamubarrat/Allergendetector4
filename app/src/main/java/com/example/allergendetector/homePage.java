@@ -213,7 +213,7 @@ public class homePage extends AppCompatActivity  {
             public void onClick(View v) {
 
 
-                Intent intent = new Intent(homePage.this,demoProfile.class);
+                Intent intent = new Intent(homePage.this,Review.class);
                 startActivity(intent);
 
 

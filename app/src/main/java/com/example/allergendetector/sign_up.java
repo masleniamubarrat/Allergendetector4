@@ -139,21 +139,21 @@ public class sign_up extends AppCompatActivity {
         TextView specialCharTextView = findViewById(R.id.password_only_one_special_char);
 
         lengthTextView.setCompoundDrawablesWithIntrinsicBounds(
-                isLengthValid ? R.drawable.ic_check : R.drawable.ic_cross,
+                isLengthValid ? R.drawable.ic_check : R.drawable.cross,
                 0,0,0
         );
         spaceTextView.setCompoundDrawablesWithIntrinsicBounds(
-                hasNoSpace ? R.drawable.ic_check : R.drawable.ic_cross,
+                hasNoSpace ? R.drawable.ic_check : R.drawable.cross,
                 0, 0, 0
         );
 
         digitTextView.setCompoundDrawablesWithIntrinsicBounds(
-                hasAtLeastOneDigit ? R.drawable.ic_check : R.drawable.ic_cross,
+                hasAtLeastOneDigit ? R.drawable.ic_check : R.drawable.cross,
                 0, 0, 0
         );
 
         specialCharTextView.setCompoundDrawablesWithIntrinsicBounds(
-                hasOnlySpecialCharacter ? R.drawable.ic_check : R.drawable.ic_cross,
+                hasOnlySpecialCharacter ? R.drawable.ic_check : R.drawable.cross,
                 0, 0, 0
         );
     }
