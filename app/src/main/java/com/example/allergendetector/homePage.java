@@ -1,11 +1,13 @@
 package com.example.allergendetector;
 
+
 import static com.example.allergendetector.R.id.like;
 import static com.example.allergendetector.R.id.menu_item_1;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,13 +49,13 @@ import kotlinx.coroutines.ObsoleteCoroutinesApi;
 
 public class homePage extends AppCompatActivity  {
     //private static final int REQUEST_IMAGE_CAPTURE = 1;
-    Button getLogOutButton;
+    Button getLogOutButton, textSearchButton;
     private LinearLayout dropdownMenu;
 
     private ImageButton cameraIcon;
     private LinearLayout imageLayout;
     private ImageView imageView;
-    private TextView foodNameTextView, allergenTextView;
+    private TextView foodNameTextView, allergenTextView,searchImageTextView;
     LinearLayout getImageLayout;
     private ActivityResultLauncher<Intent> cameraLauncher;
     private DatabaseReference databaseRef;
@@ -64,7 +66,7 @@ public class homePage extends AppCompatActivity  {
     private int likeCount = 0;
     private DatabaseReference currentUserRef;
 
-     private  TextView likeText;
+     private  TextView likeText, reviewText, getChatGptText, searchResultFoodName, searchResultAllergenName;
 
 
 
@@ -72,12 +74,43 @@ public class homePage extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-        likeText = findViewById(R.id.like);
 
+        searchImageTextView = findViewById(R.id.search_image_text);
+        reviewText = findViewById(R.id.review_text);
+        textSearchButton = findViewById(R.id.search_button);
+        getChatGptText = findViewById(R.id.get_chat_gpt_text);
+        searchResultFoodName = findViewById(R.id.search_result_food_name);
+        searchResultAllergenName = findViewById(R.id.search_result_allergen_name);
+        likeText = findViewById(R.id.like);
         likeButton = findViewById(R.id.like_button);
         dislikeButton = findViewById(R.id.dislike_button);
 
-        // Disable image buttons initially
+        String reviewTextString = "Was this Result Helpful ?";
+        String searchImageText = "Search with Image";
+        String chatGptText = "Let ChatGpt tell you more !";
+        String foodName = "Food Name";
+        String allergenName = "Allergen Name";
+        String search = "Search";
+
+        GradientUtils.applyGradientColor(searchImageTextView, searchImageText);
+        GradientUtils.applyGradientColor(reviewText, reviewTextString);
+        GradientUtils.applyGradientColor(searchResultFoodName, foodName);
+        GradientUtils.applyGradientColor(searchResultAllergenName, allergenName);
+        GradientUtils.applyGradientColor(getChatGptText,chatGptText);
+        GradientUtils.applyGradientColor(textSearchButton,search);
+
+
+        //onclickListener for search with image;
+
+        searchImageTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(homePage.this,demoMl.class);
+                startActivity(intent);
+            }
+        });
+
+
         likeButton.setEnabled(false);
         dislikeButton.setEnabled(false);
 
@@ -85,57 +118,38 @@ public class homePage extends AppCompatActivity  {
         likeButton.setImageResource(R.drawable.like);
         dislikeButton.setImageResource(R.drawable.dislike);
 
-        findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                likeButton.setEnabled(true);
-                dislikeButton.setEnabled(true);
-
-                String query = textSearchView.getQuery().toString().trim();
-                searchFoodItem(query);
-
-            }
-        });
-
-
         // Retrieve the current user's data from Firebase Realtime Database
         retrieveUserData();
 
-        // Set click listeners for likeButton and dislikeButton
         likeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                likeButton.setImageResource(R.drawable.liked);
                 likeCount++;
                 // Update like count in Firebase Realtime Database for the current user
                 updateLikeCount(likeCount);
                 // Update image resource for likeButton
-
+                likeButton.setImageResource(R.drawable.liked);
                 // Disable dislikeButton
-                dislikeButton.setEnabled(false);
-                // Disable both likeButton and dislikeButton
-                likeButton.setEnabled(false);
+                dislikeButton.setImageResource(R.drawable.dislike);
+
             }
         });
 
         dislikeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dislikeButton.setImageResource(R.drawable.disliked);
                 if (likeCount > 0) {
                     likeCount--;
                     // Update like count in Firebase Realtime Database for the current user
                     updateLikeCount(likeCount);
                 }
                 // Update image resource for likeButton
+                dislikeButton.setImageResource(R.drawable.disliked);
                 likeButton.setImageResource(R.drawable.like);
                 // Disable dislikeButton
-                dislikeButton.setEnabled(false);
-                // Disable both likeButton and dislikeButton
-                likeButton.setEnabled(false);
+
             }
         });
-
 
 
 
@@ -148,13 +162,20 @@ public class homePage extends AppCompatActivity  {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                likeButton.setEnabled(true);
+                dislikeButton.setEnabled(true);
+                likeButton.setImageResource(R.drawable.like);
+                dislikeButton.setImageResource(R.drawable.dislike);
                 String query = textSearchView.getQuery().toString().trim();
                 searchFoodItem(query);
+
             }
         });
 
         // Retrieve data from Firebase Realtime Database
         retrieveData();
+
 
 
 
@@ -184,17 +205,7 @@ public class homePage extends AppCompatActivity  {
             }
         });
 
-        findViewById(R.id.ml_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-
-                Intent intent = new Intent(homePage.this,demoMl.class);
-                startActivity(intent);
-
-
-            }
-        });
 
         findViewById(R.id.about_us_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,17 +219,7 @@ public class homePage extends AppCompatActivity  {
             }
         });
 
-        findViewById(R.id.demoProfile).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-
-                Intent intent = new Intent(homePage.this,Review.class);
-                startActivity(intent);
-
-
-            }
-        });
 
 
     }
@@ -270,8 +271,6 @@ public class homePage extends AppCompatActivity  {
                     Integer userLikeCount = dataSnapshot.child("like").getValue(Integer.class);
                     if (userLikeCount != null) {
                         likeCount = userLikeCount;
-                        likeText.setText(String.valueOf(likeCount));;
-
 
                     }
                 } else{ String noData = " no data ";
@@ -280,16 +279,21 @@ public class homePage extends AppCompatActivity  {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle database error
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
+
+
         });
 
     }
 
     private void updateLikeCount(int likeCount) {
         // Update the "like" attribute value in the user's data
+
         currentUserRef.child("like").setValue(likeCount);
+
+
     }
 
 

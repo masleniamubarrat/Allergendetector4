@@ -3,6 +3,8 @@ package com.example.allergendetector;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,16 +20,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
 
-public class AboutUs extends AppCompatActivity {
+
+public class AboutUs extends AppCompatActivity  {
     private RatingBar ratingBar;
-    private Button saveButton, submitButton;
+    private Button saveButton, submitButton, youTubeButton;
     private TextView yourRatingTextView;
     private TextView avgRatingTextView, leaveARatingTextView;
     private EditText reviewEditText;
 
     private DatabaseReference userRef;
     private String userId;
+
 
 
     @Override
@@ -42,6 +47,15 @@ public class AboutUs extends AppCompatActivity {
         leaveARatingTextView = findViewById(R.id.review_textView);
         reviewEditText = findViewById(R.id.review_editText);
         submitButton = findViewById(R.id.review_submit_button);
+        youTubeButton = findViewById(R.id.youtube_button);
+
+        youTubeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutUs.this, EmbeddedVideo.class);
+                startActivity(intent);
+            }
+        });
 
 
         leaveARatingTextView.setOnClickListener(new View.OnClickListener() {
@@ -174,4 +188,4 @@ public class AboutUs extends AppCompatActivity {
         }
     }
 
-}
+    }
