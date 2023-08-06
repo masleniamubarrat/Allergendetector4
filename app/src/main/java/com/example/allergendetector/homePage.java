@@ -1,39 +1,20 @@
 package com.example.allergendetector;
 
 
-import static com.example.allergendetector.R.id.like;
-import static com.example.allergendetector.R.id.menu_item_1;
-
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Handler;
-import android.provider.MediaStore;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.SearchView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -42,15 +23,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import com.example.allergendetector.ml.Model;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import kotlinx.coroutines.ObsoleteCoroutinesApi;
 
 public class homePage extends AppCompatActivity  {
     //private static final int REQUEST_IMAGE_CAPTURE = 1;
     Button getLogOutButton, textSearchButton;
     private LinearLayout dropdownMenu;
+    private TextView chatGptTExtResult;
 
     private ImageButton cameraIcon;
     private LinearLayout imageLayout;
@@ -63,12 +45,12 @@ public class homePage extends AppCompatActivity  {
     private TextView textSearchResult;
     private SearchView textSearchView;
     private ImageButton likeButton, dislikeButton;
+    private  Button demoMlButton;
     private int likeCount = 0;
     private DatabaseReference currentUserRef;
 
      private  TextView likeText, reviewText, getChatGptText, searchResultFoodName, searchResultAllergenName;
-
-
+     int userLikeCountValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +66,8 @@ public class homePage extends AppCompatActivity  {
         likeText = findViewById(R.id.like);
         likeButton = findViewById(R.id.like_button);
         dislikeButton = findViewById(R.id.dislike_button);
+        chatGptTExtResult = findViewById(R.id.chat_gpt_text_result);
+        demoMlButton = findViewById(R.id.demo_ml_button);
 
         String reviewTextString = "Was this Result Helpful ?";
         String searchImageText = "Search with Image";
@@ -91,6 +75,7 @@ public class homePage extends AppCompatActivity  {
         String foodName = "Food Name";
         String allergenName = "Allergen Name";
         String search = "Search";
+        String likedUs = "You have liked us n times ! ";
 
         GradientUtils.applyGradientColor(searchImageTextView, searchImageText);
         GradientUtils.applyGradientColor(reviewText, reviewTextString);
@@ -98,6 +83,19 @@ public class homePage extends AppCompatActivity  {
         GradientUtils.applyGradientColor(searchResultAllergenName, allergenName);
         GradientUtils.applyGradientColor(getChatGptText,chatGptText);
         GradientUtils.applyGradientColor(textSearchButton,search);
+        GradientUtils.applyGradientColor(likeText,likedUs);
+
+        //onClickListener for demoML3
+        demoMlButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(homePage.this, demoML3.class);
+                startActivity(intent);
+            }
+        });
+
+
+
 
 
         //onclickListener for search with image;
@@ -105,7 +103,7 @@ public class homePage extends AppCompatActivity  {
         searchImageTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(homePage.this,demoMl.class);
+                Intent intent = new Intent(homePage.this, demoModel.class);
                 startActivity(intent);
             }
         });
@@ -119,12 +117,17 @@ public class homePage extends AppCompatActivity  {
         dislikeButton.setImageResource(R.drawable.dislike);
 
         // Retrieve the current user's data from Firebase Realtime Database
-        retrieveUserData();
 
+        retrieveUserData();
         likeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 likeCount++;
+                likeText.setText("You have liked us " + likeCount + " times!");
+
+
+
                 // Update like count in Firebase Realtime Database for the current user
                 updateLikeCount(likeCount);
                 // Update image resource for likeButton
@@ -140,6 +143,8 @@ public class homePage extends AppCompatActivity  {
             public void onClick(View v) {
                 if (likeCount > 0) {
                     likeCount--;
+                    likeText.setText("You have liked us " + likeCount + " times!");
+
                     // Update like count in Firebase Realtime Database for the current user
                     updateLikeCount(likeCount);
                 }
@@ -269,6 +274,8 @@ public class homePage extends AppCompatActivity  {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     Integer userLikeCount = dataSnapshot.child("like").getValue(Integer.class);
+                    likeText.setText("You have liked us " + userLikeCount + " times!");
+
                     if (userLikeCount != null) {
                         likeCount = userLikeCount;
 
@@ -295,9 +302,6 @@ public class homePage extends AppCompatActivity  {
 
 
     }
-
-
-
 
 }
 

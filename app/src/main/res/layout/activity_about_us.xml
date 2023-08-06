@@ -14,6 +14,7 @@
         android:layout_height="56dp"
         android:layout_marginStart="120dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         app:srcCompat="@drawable/about_us_nuts"
         tools:layout_editor_absoluteX="132dp"
         tools:layout_editor_absoluteY="16dp" />
@@ -40,14 +41,7 @@
             android:textColor="@color/saddle_brown" />
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/like_count_layout"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="You have liked our service n times">
-    </TextView>
+
 
     <LinearLayout
         android:id="@+id/rating_layout"
@@ -87,10 +81,11 @@
 
             <Button
                 android:id="@+id/rating_save_button"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="10dp"
                 android:text="Save"
-                android:backgroundTint="@color/salmon"
+                android:backgroundTint="@color/saddle_brown"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone">
@@ -123,37 +118,40 @@
 
     <LinearLayout
         android:id="@+id/review_layout"
-        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/review_textView"
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
             android:text="Leave us a review !         ">
 
         </TextView>
+
         <EditText
             android:id="@+id/review_editText"
-            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:layout_height="100dp"
+            android:visibility="gone">
 
         </EditText>
+
         <Button
             android:id="@+id/review_submit_button"
-            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:backgroundTint="@color/peach"
+            android:backgroundTint="@color/saddle_brown"
             android:text="Submit"
             android:textColor="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:visibility="gone">
 
         </Button>
 
@@ -161,6 +159,7 @@
     <Button
         android:id="@+id/youtube_button"
         android:text="youtube"
+        android:backgroundTint="@color/saddle_brown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 

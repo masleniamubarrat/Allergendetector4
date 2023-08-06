@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:layout_marginStart="10dp"
+    android:layout_marginBottom="10dp"
+    tools:context=".demoML3">
+
+    <ImageView
+        android:id="@+id/predict_image"
+        android:src="@color/antique_white"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="30dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp">
+    </ImageView>
+
+    <Button
+        android:id="@+id/select_button"
+        android:backgroundTint="@color/antique_white"
+        android:text="Select Image"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </Button>
+
+    <Button
+        android:id="@+id/capture_button"
+        android:backgroundTint="@color/antique_white"
+        android:text="Capture"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </Button>
+
+    <Button
+        android:id="@+id/predict_button"
+        android:backgroundTint="@color/antique_white"
+        android:text="Predict"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </Button>
+
+    <TextView
+        android:id="@+id/result_textView"
+        android:text="Result : "
+        android:textStyle="bold"
+        android:paddingStart="5dp"
+        android:paddingTop="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+    </TextView>
+
+
+
+</LinearLayout>

@@ -99,6 +99,7 @@
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
+        android:background="@color/white"
         android:id="@+id/image_search_cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -108,7 +109,7 @@
             android:id="@+id/image_search_layout"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:background="@color/antique_white"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <ImageButton
@@ -156,26 +157,26 @@
 
         <TextView
             android:id="@+id/search_result_food_name"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
             android:background="@color/white"
             android:text="Food name: "
             android:paddingStart="3dp"
             android:paddingTop="3dp"
             android:layout_width="170dp"
-            android:layout_height="40dp">
+            android:layout_height="50dp">
 
         </TextView>
         <TextView
             android:id="@+id/search_result_allergen_name"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
             android:background="@color/white"
             android:text="Allergen: "
             android:paddingStart="3dp"
             android:paddingTop="3dp"
             android:layout_width="170dp"
-            android:layout_height="40dp">
+            android:layout_height="50dp">
 
         </TextView>
 
@@ -193,9 +194,9 @@
         <SearchView
             android:id="@+id/text_search_search_view"
             android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
             android:background="@color/white"
             android:clickable="true"
             android:queryHint="type something" >
@@ -205,9 +206,9 @@
         <TextView
             android:id="@+id/text_search_result"
             android:layout_width="230dp"
-            android:layout_height="50dp"
+            android:layout_height="68dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:background="@color/white">
 
         </TextView>
@@ -222,13 +223,7 @@
         android:layout_height="wrap_content">
 
     </Button>
-    <TextView
-        android:id="@+id/like"
-        android:text="like"
-        android:layout_width="50dp"
-        android:layout_height="50dp">
 
-    </TextView>
 
     <LinearLayout
         android:orientation="vertical"
@@ -277,29 +272,46 @@
             </ImageButton>
 
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/chat_gpt_layOut"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="280dp">
-
         <TextView
-            android:id="@+id/get_chat_gpt_text"
-            android:layout_marginTop="10dp"
+            android:id="@+id/like"
             android:layout_marginStart="10dp"
-            android:text="Let chatGPT tell you more "
+            android:layout_marginBottom="10dp"
+            android:text="like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
         </TextView>
 
-           <TextView
-               android:id="@+id/chat_gpt_text_result"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/chat_gpt_layOut"
+            android:layout_width="match_parent"
+            android:layout_height="129dp"
+            android:orientation="vertical">
 
-           </TextView>
+            <TextView
+                android:id="@+id/get_chat_gpt_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Let chatGPT tell you more "></TextView>
+
+            <TextView
+                android:id="@+id/chat_gpt_text_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </TextView>
 
         </LinearLayout>
+        <Button
+            android:id="@+id/demo_ml_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Demo ml"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/antique_white">
+        </Button>
 
     </LinearLayout>
 

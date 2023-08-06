@@ -27,7 +27,7 @@ public class AboutUs extends AppCompatActivity  {
     private RatingBar ratingBar;
     private Button saveButton, submitButton, youTubeButton;
     private TextView yourRatingTextView;
-    private TextView avgRatingTextView, leaveARatingTextView;
+    private TextView avgRatingTextView, leaveARatingTextView, rateUsText, yourRatingText, avgRatingText, reviewTextView;
     private EditText reviewEditText;
 
     private DatabaseReference userRef;
@@ -48,6 +48,20 @@ public class AboutUs extends AppCompatActivity  {
         reviewEditText = findViewById(R.id.review_editText);
         submitButton = findViewById(R.id.review_submit_button);
         youTubeButton = findViewById(R.id.youtube_button);
+        rateUsText = findViewById(R.id.rating_text);
+        yourRatingText = findViewById(R.id.your_rating);
+        avgRatingText = findViewById(R.id.avg_rating);
+        reviewTextView = findViewById(R.id.review_textView);
+
+        String ratingText = "Give Us Stars : ";
+        String yourRating = "Your rating : ";
+        String averageRating = "Average Rating ";
+        String leaveAReview = "Leave us a Review !";
+
+        GradientUtils.applyGradientColor(rateUsText, ratingText);
+        GradientUtils.applyGradientColor(yourRatingText, yourRating);
+        GradientUtils.applyGradientColor(avgRatingText, averageRating);
+        GradientUtils.applyGradientColor(reviewTextView,leaveAReview);
 
         youTubeButton.setOnClickListener(new View.OnClickListener() {
             @Override

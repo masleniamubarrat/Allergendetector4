@@ -3,10 +3,6 @@ plugins {
     id 'com.google.gms.google-services'
 }
 
-
-
-
-
 android {
     namespace 'com.example.allergendetector'
     compileSdk 33
@@ -18,8 +14,9 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
+
 
     buildTypes {
         release {
@@ -51,6 +48,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:20.2.1'
     implementation 'org.tensorflow:tensorflow-lite-support:0.1.0'
     implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu:2.3.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     implementation 'com.facebook.fresco:fresco:2.5.0'
     implementation 'com.facebook.fresco:animated-gif:2.5.0'
@@ -73,6 +71,13 @@ dependencies {
     //7.15.23
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:12.0.0'
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
+    //7.18.23
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+
+
 
 
 
